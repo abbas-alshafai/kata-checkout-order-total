@@ -1,5 +1,6 @@
 package com.holykiwi.checkouttotal.services;
 
+import com.holykiwi.checkouttotal.dtos.ItemDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,11 +16,24 @@ public class ItemServiceTest {
 
     @Autowired ItemService itemService;
 
-    @Test
-    public void whenAddingItemThenItCanBeReturned()
+    private ItemDTO item1;
+    private final String ITEM_NAME1 = "soup";
+
+    @Before
+    public void setUp()
     {
-        String itemName = "soup";
-        String createdItemName = itemService.addItem(itemName);
-        assertEquals(itemName, createdItemName);
+        item1 = ItemDTO.builder()
+                .name(ITEM_NAME1)
+                .build();
     }
+
+    @Test
+    public void whenAddingItemThenGetBackItsName()
+    {
+        String createdItemName = itemService.addItem(ITEM_NAME1);
+        assertEquals(item1.getName(), createdItemName);
+    }
+
+
+
 }
