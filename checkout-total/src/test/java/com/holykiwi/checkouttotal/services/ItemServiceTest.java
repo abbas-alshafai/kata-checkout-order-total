@@ -19,6 +19,7 @@ public class ItemServiceTest {
     private ItemDTO item1;
     private final String ITEM_NAME1 = "soup";
 
+
     @Before
     public void setUp()
     {
@@ -27,6 +28,7 @@ public class ItemServiceTest {
                 .build();
     }
 
+
     @Test
     public void whenAddingItemThenGetBackItsName()
     {
@@ -34,6 +36,14 @@ public class ItemServiceTest {
         assertEquals(item1.getName(), createdItemName);
     }
 
+
+    @Test
+    public void whenAddingItemThenItCanBeRetrieved()
+    {
+        String createdItemName = itemService.addItem(ITEM_NAME1);
+        ItemDTO storedItem = itemService.getItem(createdItemName);
+        assertEquals(item1.getName(), storedItem.getName());
+    }
 
 
 }

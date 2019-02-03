@@ -17,10 +17,18 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public String addItem(String name) {
+    public String addItem(String name)
+    {
         ItemDTO item = ItemDTO.builder()
                 .name(name)
                 .build();
-        return itemDAO.saveItem(item);
+        return itemDAO.save(item);
+    }
+
+
+    @Override
+    public ItemDTO getItem(String itemName)
+    {
+        return itemDAO.findByName(itemName);
     }
 }

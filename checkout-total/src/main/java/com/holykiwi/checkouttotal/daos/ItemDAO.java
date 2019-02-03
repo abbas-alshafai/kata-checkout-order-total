@@ -14,7 +14,7 @@ public class ItemDAO {
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemDAO.class);
     private Map<String, ItemDTO> items = new HashMap<>();
 
-    public String saveItem(ItemDTO item)
+    public String save(ItemDTO item)
     {
         items.put(item.getName(), item);
 
@@ -26,4 +26,8 @@ public class ItemDAO {
         return items.get(item.getName()).getName();
     }
 
+    public ItemDTO findByName(String itemName)
+    {
+        return items.get(itemName);
+    }
 }
