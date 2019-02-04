@@ -2,6 +2,9 @@ package com.holykiwi.checkouttotal.services;
 
 import com.holykiwi.checkouttotal.daos.ItemDAO;
 import com.holykiwi.checkouttotal.dtos.ItemDTO;
+import com.holykiwi.checkouttotal.exceptions.ItemNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,7 @@ import java.math.BigDecimal;
 @Service
 public class ItemServiceImpl implements ItemService{
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemServiceImpl.class);
     private final ItemDAO itemDAO;
 
     @Autowired
@@ -30,8 +34,7 @@ public class ItemServiceImpl implements ItemService{
 
 
     @Override
-    public ItemDTO getItem(String itemName)
-    {
+    public ItemDTO getItem(String itemName) throws ItemNotFoundException {
         return itemDAO.findByName(itemName);
     }
 }

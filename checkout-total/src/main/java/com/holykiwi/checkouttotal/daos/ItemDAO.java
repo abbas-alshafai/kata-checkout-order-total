@@ -1,5 +1,6 @@
 package com.holykiwi.checkouttotal.daos;
 
+import com.holykiwi.checkouttotal.exceptions.ItemNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.holykiwi.checkouttotal.dtos.ItemDTO;
@@ -31,8 +32,10 @@ public class ItemDAO {
         return items.get(item.getName()).getName();
     }
 
-    public ItemDTO findByName(String itemName)
-    {
+    public ItemDTO findByName(String itemName) throws ItemNotFoundException {
+        if( ! items.containsKey(itemName) )
+            throw new ItemNotFoundException(String.format("No item exists with the name %s", itemName));
+
         LOGGER.debug("find item by name:\t{}", itemName);
         return items.get(itemName);
     }
