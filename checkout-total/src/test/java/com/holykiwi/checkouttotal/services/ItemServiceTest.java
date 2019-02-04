@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -21,6 +21,7 @@ public class ItemServiceTest {
     private ItemDTO item1;
     private final String ITEM1_NAME = "soup";
     private final BigDecimal ITEM1_PRICE = new BigDecimal("1.89");
+
 
     @Before
     public void setUp()
@@ -39,13 +40,23 @@ public class ItemServiceTest {
         assertEquals(item1.getName(), createdItemName);
     }
 
+
     @Test
     public void whenAddingTwoItemsWithSameNameThenGetBackTheLatestName()
     {
-        String createdItemName = itemService.addItem(ITEM1_NAME, ITEM1_PRICE);
-        String laterItem = itemService.addItem(ITEM1_NAME, ITEM1_PRICE);
-        assertEquals(ITEM1_NAME, laterItem);
+        itemService.addItem(ITEM1_NAME, ITEM1_PRICE);
+        ItemDTO oldItem = itemService.getItem(ITEM1_NAME);
+
+        BigDecimal newPrice = new BigDecimal("24.23");
+        String newItemName = itemService.addItem(ITEM1_NAME, newPrice);
+        ItemDTO storedItem = itemService.getItem(newItemName);
+
+        assertNotEquals(newPrice, oldItem.getPrice());
+        assertEquals(ITEM1_NAME, newItemName);
+        assertEquals(ITEM1_NAME, storedItem.getName());
+        assertEquals(newPrice, storedItem.getPrice());
     }
+
 
     @Test
     public void whenAddingItemThenItCanBeRetrieved()
