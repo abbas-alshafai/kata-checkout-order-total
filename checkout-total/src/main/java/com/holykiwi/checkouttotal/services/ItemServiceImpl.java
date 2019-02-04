@@ -37,4 +37,14 @@ public class ItemServiceImpl implements ItemService{
     public ItemDTO getItem(String itemName) throws ItemNotFoundException {
         return itemDAO.findByName(itemName);
     }
+
+    @Override
+    public void delete(ItemDTO item) throws ItemNotFoundException {
+        delete(item.getName());
+    }
+
+    @Override
+    public void delete(String itemName) throws ItemNotFoundException {
+        itemDAO.delete(itemName);
+    }
 }

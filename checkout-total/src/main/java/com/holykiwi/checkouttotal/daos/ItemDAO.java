@@ -39,4 +39,10 @@ public class ItemDAO {
         LOGGER.debug("find item by name:\t{}", itemName);
         return items.get(itemName);
     }
+
+    public void delete(String itemName) throws ItemNotFoundException {
+        if( ! items.containsKey(itemName) )
+            throw new ItemNotFoundException(String.format("No item exists with the name %s", itemName));
+        items.remove(itemName);
+    }
 }

@@ -43,7 +43,8 @@ public class ItemServiceTest {
 
 
     @Test
-    public void whenAddingTwoItemsWithSameNameThenGetBackTheLatestName() throws ItemNotFoundException {
+    public void whenAddingTwoItemsWithSameNameThenGetBackTheLatestName() throws ItemNotFoundException
+    {
         itemService.addItem(ITEM1_NAME, ITEM1_PRICE);
         ItemDTO oldItem = itemService.getItem(ITEM1_NAME);
 
@@ -59,16 +60,34 @@ public class ItemServiceTest {
 
 
     @Test
-    public void whenAddingItemThenItCanBeRetrieved() throws ItemNotFoundException {
+    public void whenAddingItemThenItCanBeRetrieved() throws ItemNotFoundException
+    {
         String createdItemName = itemService.addItem(ITEM1_NAME, ITEM1_PRICE);
         ItemDTO storedItem = itemService.getItem(createdItemName);
         assertEquals(item1.getName(), storedItem.getName());
         assertEquals(item1.getPrice(), storedItem.getPrice());
     }
 
+
     @Test(expected = ItemNotFoundException.class)
-    public void whenQueryingNotExistingItemThrowException() throws ItemNotFoundException {
+    public void whenQueryingNotExistingItemThrowException() throws ItemNotFoundException
+    {
         itemService.getItem("not existing item");
     }
 
+
+    @Test(expected = ItemNotFoundException.class)
+    public void whenQueryingDeletedItemThrowException() throws ItemNotFoundException
+    {
+        String createdItemName = itemService.addItem(ITEM1_NAME, ITEM1_PRICE);
+        itemService.delete(itemService.getItem(createdItemName));
+        itemService.getItem(createdItemName);
+    }
+
+
+    @Test(expected = ItemNotFoundException.class)
+    public void whenDeletingNotFoundItemThrowException() throws ItemNotFoundException
+    {
+        itemService.delete(itemService.getItem(ITEM1_NAME));
+    }
 }
