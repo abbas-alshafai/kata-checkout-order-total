@@ -16,6 +16,11 @@ public class ItemDAO {
 
     public String save(ItemDTO item)
     {
+        if(items.containsKey(item.getName()))
+            LOGGER.warn("The item you try to add already exists and it it will be overridden by the new one. " +
+                    "Printing the old item:%n{}", items.containsKey(item.getName()));
+
+        LOGGER.debug("Adding new item to the repository:%n{}", item.toString());
         items.put(item.getName(), item);
 
         /*
@@ -28,6 +33,7 @@ public class ItemDAO {
 
     public ItemDTO findByName(String itemName)
     {
+        LOGGER.debug("find item by name:\t{}", itemName);
         return items.get(itemName);
     }
 }

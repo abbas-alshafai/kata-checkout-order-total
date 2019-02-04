@@ -5,6 +5,8 @@ import com.holykiwi.checkouttotal.dtos.ItemDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class ItemServiceImpl implements ItemService{
 
@@ -17,10 +19,11 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public String addItem(String name)
+    public String addItem(String name, BigDecimal price)
     {
         ItemDTO item = ItemDTO.builder()
                 .name(name)
+                .price(price)
                 .build();
         return itemDAO.save(item);
     }
