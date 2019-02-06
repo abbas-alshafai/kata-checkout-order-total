@@ -20,7 +20,7 @@ public class BasketServiceImpl implements BasketService{
 
 
     @Autowired
-    public void setItemService(ItemService itemService)
+    public BasketServiceImpl(ItemService itemService)
     {
         this.itemService = itemService;
     }
