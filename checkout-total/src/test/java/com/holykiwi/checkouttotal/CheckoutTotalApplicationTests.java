@@ -1,6 +1,7 @@
 package com.holykiwi.checkouttotal;
 
 import com.holykiwi.checkouttotal.daos.ItemDAO;
+import com.holykiwi.checkouttotal.services.BasketService;
 import com.holykiwi.checkouttotal.services.ItemService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,11 +17,13 @@ public class CheckoutTotalApplicationTests {
 
 	@Autowired private ItemService itemService;
 	@Autowired private ItemDAO itemDAO;
+	@Autowired private BasketService basketService;
 
 	@Test
 	public void whenSpringContextLoadsThenNoNullBeans() {
 		assertNotNull(itemService);
 		assertNotNull(itemDAO);
+		assertNotNull(basketService);
 	}
 
 }
