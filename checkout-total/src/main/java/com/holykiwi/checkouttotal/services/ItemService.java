@@ -10,4 +10,6 @@ public interface ItemService {
     ItemDTO getItem(String itemName) throws ItemNotFoundException;
     void delete(ItemDTO item) throws ItemNotFoundException;
     void delete(String itemName) throws ItemNotFoundException;
+    String addItem(String item1_name, BigDecimal item1_price, boolean b);
+    void deleteAll();
 }

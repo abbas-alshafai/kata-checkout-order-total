@@ -45,4 +45,9 @@ public class ItemDAO {
             throw new ItemNotFoundException(String.format("No item exists with the name %s", itemName));
         items.remove(itemName);
     }
+
+    public void deleteAll()
+    {
+        items.clear();
+    }
 }

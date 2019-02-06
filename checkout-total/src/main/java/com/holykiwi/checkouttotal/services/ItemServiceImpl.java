@@ -47,4 +47,20 @@ public class ItemServiceImpl implements ItemService{
     public void delete(String itemName) throws ItemNotFoundException {
         itemDAO.delete(itemName);
     }
+
+    @Override
+    public String addItem(String name, BigDecimal price, boolean isByWeight)
+    {
+        ItemDTO item = ItemDTO.builder()
+                .name(name)
+                .price(price)
+                .isByWeight(false)
+                .build();
+        return itemDAO.save(item);
+    }
+
+    @Override
+    public void deleteAll() {
+        itemDAO.deleteAll();
+    }
 }
