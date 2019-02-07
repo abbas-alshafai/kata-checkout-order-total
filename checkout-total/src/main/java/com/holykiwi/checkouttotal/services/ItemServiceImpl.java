@@ -54,7 +54,7 @@ public class ItemServiceImpl implements ItemService{
         ItemDTO item = ItemDTO.builder()
                 .name(name)
                 .price(price)
-                .isByWeight(false)
+                .isByWeight(isByWeight)
                 .build();
         return itemDAO.save(item);
     }
